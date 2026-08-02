@@ -1,0 +1,601 @@
+<?php 
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="description" content="Discover the best Morocco tours with our expert guides. Book your desert adventure, city tours, and cultural experiences today.">
+    <meta name="keywords" content="Morocco tours, Sahara desert, Marrakech, Fes, Agadir, travel Morocco">
+    <meta name="author" content="Morocco Tours">
+    <title>Morocco Tours | Discover the Magic of Morocco | Book Now</title>
+    <link rel="stylesheet" href="tours.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <!-- Google Maps API (replace YOUR_API_KEY with your real key) -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    h1, h2, h3 {
+      color: #8B4513;
+    }
+    section {
+      margin-bottom: 40px;
+      background: rgb(255, 255, 255);
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .day-itinerary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .day-description, .day-photo {
+      flex: 1;
+      min-width: 300px;
+    }
+    .day-photo img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .included-section {
+      display: flex;
+      gap: 30px;
+    }
+    .included, .not-included {
+      flex: 1;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    .included {
+      background-color: #f0f8ff;
+      border-left: 4px solid #4682B4;
+    }
+    .not-included {
+      background-color: #fff0f0;
+      border-left: 4px solid #cd5c5c;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    #map {
+      height: 400px;
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('desert.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.tours-section {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 50px 20px;
+}
+
+.tour-box {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 20px 30px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.tour-box h3 {
+  color: #e76f51;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.tour-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tour-box li {
+  margin: 10px 0;
+}
+
+.tour-box a {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.tour-box a:hover {
+  color: #e76f51;
+}
+
+/* Social Icons */
+.social-icons {
+  position: fixed;
+  top: 30%;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.social-icons .icon {
+  background-color: white;
+  color: #333;
+  padding: 10px;
+  border-radius: 50%;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 18px;
+}
+
+.social-icons .icon:hover {
+  background-color: #e76f51;
+  color: white;
+}
+
+  </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="logo">Historicmorocco<span>Tours</span></div>
+            <ul class="nav-links">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+              <li class="dropdown">
+                    <a href="#tours" class="dropbtn">Tours <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Fes <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="fesmerzouga.html">2 day tour from Fes to Merzouga</a>
+                                <a href="fesmarrakech.html">3 days desert tour from Fes to Marrakech</a>
+                                <a href="fesmarrakech3.html">4 day tour from Fes to Marrakech</a>
+                                <a href="fesmarrakech21.html">5 day from Fes to Marrakech desert tour</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Agadir <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="agadir1.html">2 day from Agadir to Sahara Desert</a>
+                                <a href="agadir2.html">3day from Agadir to zagoura desert via ouarzazate</a>
+                                <a href="agadir3.html">4 day from Agadir to marrackech via ouarzazate and taroudante</a>
+                                <a href="agadir4.html">6 days from Agadir to Fez Morocco Imperial Cities</a>
+                                <a href="agadir5.html">7 days Morocco desert tours Agadir to Fes via Marrakech</a>
+                                <a href="agadir6.html">8 Days from Agadir to the South of Morocco</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Tangier <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="tanger1.html">8 days from Tangier to Marrakech via the Sahara Desert</a>
+                                <a href="tanger2.html">10 days from Tangier to Marrakech via Merzouga</a>
+                                <a href="tanger3.html">12 Days From Tangier To Marrakech Via Erg Chebbi</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Marrakech <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="marra1.html">2 days from Marrakech to Zagora</a>
+                                <a href="marra2.html">2 days from Marrakech to Merzouga</a>
+                                <a href="marra3.html">3 days Marrakech to Fes desert tour</a>
+                                <a href="marra4.html">3 days from Marrakech to Merzouga Desert</a>
+                                <a href="marra5.html">4 days from Marrakech to Fes Desert Tour</a>
+                                <a href="marra6.html">4 days Marrakech to Merzouga Desert Tour</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Casablanca <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="casa1.html">2 days from Casablanca to Fes</a>
+                                <a href="casa2.html">2 days from Casablanca to Chefchaouen</a>
+                                <a href="casa3.html">3 days from Casablanca to Tangier and Chefchaouen</a>
+                                <a href="casa4.html">4 days Desert Tour from Casablanca to Sahara Desert</a>
+                                <a href="casa5.html">4 days Imperial cities back to Casablanca</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#day-trips" class="dropbtn">Day Trips <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <div class="dropdown-submenu">
+                            <a href="#">Day Trips from Fes <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="#">One day guided tour Fes sightseeing</a>
+                                <a href="#">Day trip from Fes to Volubilis and Meknes</a>
+                                <a href="#">Day Trip from Fes to The Middle Atlas Mountains</a>
+                                <a href="#">Day Trip from Fes to Chefchaouen</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Day Trips from Marrakech <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="#">Day Trip from Marrakech to Ait Benhaddou</a>
+                                <a href="#">Day Trip from Marrakech to Essaouira</a>
+                                <a href="#">Day Trip from Marrakech to the Ouzoud Falls</a>
+                                <a href="#">Day Trip from Marrakech to Ourika Valley</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Day Trips from Casablanca <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="#">Day Trip from Casablanca to Fez</a>
+                                <a href="#">Day Trip from Casablanca to Marrakech</a>
+                                <a href="#">Day Trip from Casablanca to Rabat</a>
+                                <a href="#">Day Trip from Casablanca to Volubilis</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search tours..." autocomplete="off">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-results" id="search-results"></div>
+            </div>
+        </nav>
+    </header>
+    
+  <section id="maps">
+    <h3>Maps</h3>
+    <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1069.2272291129895!2d-7.9898268!3d31.6294723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDM3JzQ2LjEiTiA3wrA1OSczMy40Ilc!5e0!3m2!1sen!2sma!4v1620000000000!5m2!1sen!2sma" 
+                            width="100%" 
+                            height="200" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                    </iframe>
+    
+  </section>
+
+  
+
+  </section>
+
+    <!-- Day 1 -->
+        <section class="tour-section">
+            <h2>DAY 1: TANGIER TO CHEFCHAOUEN</h2>
+            <div class="day-itinerary">
+                <div class="day-description">
+                    <p>
+
+
+After meeting you at the place we had agreed, we will start our journey through the Rif mountains and the city of Tetoun to enjoy the view of the magnificent mountains 
+until we reach Chefchaouan. In fact, it is one of the beautiful villages at the foot of the Rif Mountains. 
+The Medina of Chefchaouen avait a place de style espagnol entourée de nombreux magasins d’art et d’artisanat branches, 
+restaurants and cafés sur le toit où vous passerez votre nuit dans an endroit agréable pour profiter de la brise et de la beauty nature
+                      </p>
+                    
+                </div>
+                <div class="day-photo">
+                    <img src="https://takemoroccotours.com/wp-content/uploads/2022/02/Chefchaouen-Morocco-Travel.jpg" alt="Merzouga dunes">
+                </div>
+            </div>
+        </section>
+    <!-- Day 2 -->
+        <section class="tour-section">
+            <h2>DAY 2: CHEFCHAOUEN - VOLUBILIS - MEKNES - FES</h2>
+            <div class="day-itinerary">
+                <div class="day-description">
+                    <p>
+DAY 2: CHEFCHAOUEN - VOLUBILIS - MEKNES - FES
+After your breakfast in the riad, we will start driving towards Volubilis passing through Wazan and other villages of the rif. Then in Volubilis we will discover the Roman ruins and learn more about the archaeological site of Moroccan history, after visiting the ruins we will go to the city of Meknes, the 17th century heritage where we will stop for lunch and hang out on the immense walls of the medina, bab el mansour and enjoy a visit to the sanctuary of moulay ismail. After the visit of Meknes, we will go directly to the city of Fez, 
+where you will spend the night in a riad.
+
+
+</p>
+                    
+                </div>
+                <div class="day-photo">
+                    <img src="https://takemoroccotours.com/wp-content/uploads/2022/02/Volubilis-visit-Morocco.043.jpeg" alt="Todgha Gorge">
+                </div>
+            </div>
+        </section>
+          <!-- Day 3 -->
+        <section class="tour-section">
+            <h2>DAY 3: FULL DAY IN FES</h2>
+            <div class="day-itinerary">
+                <div class="day-description">
+                    <p>
+
+
+
+
+After breakfast in your riad, you will explore the oldest city in Morocco,
+ strolling through its alleys and small streets. Therefore, our tour begins with a visit to the gate of the Royal Palace, the Jewish seat, the first Mellah built in Morocco, built in the 16th century. First, we will make sure to visit all the sites of cultural and historical interest, including the famous Al Qaraouine University, the oldest in the region, the Tanneries, the Attarine Museum and the Mulay Idriss Mausoleum. After lunch, you will continue your Morocco Tours Tangier,
+ visit the tile cooperative and then discover a magnificent panoramic view of the entire medina of Fez
+</p>
+                    
+                </div>
+                <div class="day-photo">
+                    <img src="https://takemoroccotours.com/wp-content/uploads/2022/02/Fez-visit-Morocco.009.jpeg" alt="Todgha Gorge">
+                </div>
+            </div>
+        </section>
+            <!-- Day 4-->
+        <section class="tour-section">
+            <h2>DAY 4: FES - IIFRANE - MIDELT - ZIZ VALLEY - ERFOUD - MERZOUGA</h2>
+            <div class="day-itinerary">
+                <div class="day-description">
+                    <p>
+
+
+
+
+That day, we will start our trip to the southeast through the Middle Atlas, 
+passing by Ifrane « the Moroccan Switzerland » then Azrou where we will make a stop in the famous cedar forest,
+ the largest in Morocco to see and play with the Barbary apes. From there we drive further south passing several towns and you will have the chance to see nomads living in tents along the way. then we will stop at Midelt where you will enjoy your lunch. Later, we will continue our journey to Merzouga via the Tizi N’Talghomt pass (1907m) while enjoying the panoramic view. You will also have a stop to enjoy a panoramic view of the Aoufous palm grove along the Ziz river. At the end of the day, we will continue to the captivating dunes of Erg Chebbi, 
+where you will spend the night in a Riad or a Hotel.
+</p>
+                    
+                </div>
+                <div class="day-photo">
+                    <img src="https://takemoroccotours.com/wp-content/uploads/2022/02/Cedar-Forest-travel-Morocco.070.jpeg" alt="Todgha Gorge">
+                </div>
+            </div>
+        </section>
+              <!-- Day 5-->
+        <section class="tour-section">
+            <h2>DAY 5: MERZOUGA - ERG CHEBBI - CAMEL TREKKING</h2>
+            <div class="day-itinerary">
+                <div class="day-description">
+                    <p>
+
+
+
+
+After breakfast at your riad, you can explore the area a bit before starting your camel ride; 
+You will visit the Gnawa, originally from Mali, Senegal and Sudan, in their village of Khamlia, where you will learn about their music and way of life. later we will drive to the desert area to meet nomadic families and explore their way of life. Today our lunch will be a traditional Berber meal (Berber pizza). You will also have the opportunity to visit the old town of Rissani, foundation of the Alaouite dynasty, the current ruling royal family in Morocco. Rissani is surrounded by around 360 ksar (a walled city with many towers) and has a large souk (an open market), which is held three times a week. Formerly called Sijilmassa, it was the meeting place for salt caravans from Timbuktu in Mali. Here you will walk through the souk, selling spices, vegetables and fabrics. Return to the town of Merzouga. In the afternoon, you will ride a camel, guided by an experienced camel driver, to explore what is hidden among the highest sand dunes in Morocco.
+ Dinner will be served in front of the tent where you will spend the night.
+</p>
+                    
+                </div>
+                <div class="day-photo">
+                    <img src="https://takemoroccotours.com/wp-content/uploads/2022/02/Merzouga-desert-travel-morocco.052.jpeg" alt="Todgha Gorge">
+                </div>
+            </div>
+        </section>
+             <!-- Day 6-->
+        <section class="tour-section">
+            <h2>DAY 6: MERZOUGA - TOUDRA GORGE - DADES VALLEY</h2>
+            <div class="day-itinerary">
+                <div class="day-description">
+                    <p>
+
+
+
+
+
+
+In the morning after watching the sunrise over the Sahara dunes and having breakfast, we will return by camel to our hotel or Riad. Then we will cross Rissani, Alnif, Todra Gorge. Where we will enjoy the rocky canyon and have a traditional Moroccan lunch.
+ We take a short walk through the gorges before reaching the Dades Valley for dinner and accommodation
+</p>
+                    
+                </div>
+                <div class="day-photo">
+                    <img src="https://takemoroccotours.com/wp-content/uploads/2022/02/Todra-Gordes-Visit-Morocco.022.jpegg" alt="Todgha Gorge">
+                </div>
+            </div>
+        </section>
+                  <!-- Day 7-->
+        <section class="tour-section">
+            <h2>
+DAY 7: DADES VALLEY - OUARZAZATE - AIT BEN HADDOU - MARRAKECH</h2>
+            <div class="day-itinerary">
+                <div class="day-description">
+                    <p>
+
+
+
+
+
+After breakfast, we will cross the Dades Valley to Kalaa M’gouna and Ouarzazate.
+ From the road that runs through the Dades Valley is the Road of a Thousand Kasbahs. 
+ There are many opportunities to take some of the best photos of your travels. Later, we will stop at the Kasbah Ait Ben Haddou for lunch, the largest Kasbah in Morocco, built by T-hami El Glaoui, one of the last Berber chiefs at the beginning of the 20th century, it was one of his trials. During its long journey from the Sahara to Marrakech, now the kasbah is one of the UNESCO heritage sites. after that we will change the way to cross the high atlas mountains full of panoramic views and attractive berber villages to Marrakech. 
+Then overnight in an elegant riad in the medina
+</p>
+                    
+                </div>
+                <div class="day-photo">
+                    <img src="https://takemoroccotours.com/wp-content/uploads/2022/02/Ait-Ben-Haddou-Kasbah-travel-Morocco.029.jpeg" alt="Todgha Gorge">
+                </div>
+            </div>
+        </section>
+                 <!-- Day 8-->
+        <section class="tour-section">
+            <h2>DAY 8: FULL DAY IN MARRAKECH</h2>
+            <div class="day-itinerary">
+                <div class="day-description">
+                    <p>
+
+
+
+
+
+
+In the morning, after having breakfast in the riad, we explore Marrakech « the red city of Morocco », 
+we will make sure that you see the most important sites of historical and cultural interest. First, the Majorelle gardens, the Koutoubia tower, the Saadian tombs, the Bahia palace. Then, after lunch in a restaurant near the square, you will walk through the souks and admire hundreds of handicrafts. In the afternoon you will have free time to marvel at other parts of the city on your own.
+ Spend the night in the riad
+</p>
+                    
+                </div>
+                <div class="day-photo">
+                    <img src="https://takemoroccotours.com/wp-content/uploads/2022/02/Marrakechvisit-Morocco.057.jpeg" alt="Todgha Gorge">
+                </div>
+            </div>
+        </section>
+            <!-- Day 9-->
+        <section class="tour-section">
+            <h2>DAY 9: DAY IN ESSAOUIRA</h2>
+            <div class="day-itinerary">
+                <div class="day-description">
+                    <p>
+
+
+
+After breakfast at your riad, you will start traveling to the coastal city of Essaouira, exploring the city. We will make sure to visit the fortress of Skala; see Thuja wood carved by artisans. Then, stroll through the alleys of the medina and admire hundreds of handicrafts.
+ This « city of the wind » attracts surfers from all over the world. Essaouira has known many civilizations, including the Portuguese occupation. Therefore, they affect a large part of its architecture; however, it is still a small town with a lot of history. Due to its size and characteristics, blue doors and washed walls. It is also considered the « Jewel of the Atlantic » of Morocco.
+
+Therefore, you will also visit the argan oil women’s cooperative.
+ Here they extract the oil known for its culinary, cosmetic and medicinal properties. 
+ 
+ Lunch will be Moroccan style: fresh fish « cooked to order » at the fish market. 
+ Then in the afternoon, you will return to Marrakech. Finally one night in your riad.
+
+</p>
+                    
+                </div>
+                <div class="day-photo">
+                    <img src="https://takemoroccotours.com/wp-content/uploads/2022/02/Essaouira-visit-Morocco.012.jpeg" alt="Todgha Gorge">
+                </div>
+            </div>
+        </section>
+            <!-- Day 10 -->
+        <section class="tour-section">
+            <h2>DAY 10: MARRAKECH - AIRPORT</h2>
+            <div class="day-itinerary">
+                <div class="day-description">
+                    <p>
+
+
+Transfer to the airport of Casablanca or Marrakech, hence the end of our Morocco Tours Tangier.
+
+</p>
+                    
+                </div>
+                <div class="day-photo">
+                    <img src="https://takemoroccotours.com/wp-content/uploads/2022/02/Marrakechvisit-Morocco.043.jpeg" alt="Todgha Gorge">
+                </div>
+            </div>
+        </section>
+
+       
+    <!-- Included/Excluded -->
+        <section class="tour-section">
+            <h2>What's Included & not included</h2>
+            <div class="included-section">
+                <div class="included">
+                    <h3>Included</h3>
+                    <ul>
+                        <li>Private air-conditioned transportation</li>
+                        <li>English/French speaking driver/guide</li>
+                        <li>2 nights accommodation</li>
+                        <li>Camel trek in Merzouga</li>
+                        <li>2 breakfasts and 2 dinners</li>
+                    </ul>
+                </div>
+                <div class="not-included">
+                    <h3>Not Included</h3>
+                    <ul>
+                        <li>Lunches and drinks</li>
+                        <li>Entrance fees to monuments</li>
+                        <li>Travel insurance</li>
+                        <li>Tips and personal expenses</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our Tours</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <section class="tours-section">
+    <div class="tour-box">
+      <h3>Our tours</h3>
+      <ul>
+        <li><a href="ourtourfes.html">➤ Tours from Fes</a></li>
+        <li><a href="#">➤ Tours from Agadir</a></li>
+        <li><a href="#">➤ Tours from Tangier</a></li>
+        <li><a href="#">➤ Tours from Marrakech</a></li>
+        <li><a href="#">➤ Tours from Casablanca</a></li>
+      </ul>
+    </div>
+    <div class="tour-box">
+      <h3>Our day tours</h3>
+      <ul>
+        <li><a href="#">➤ Day tours from Marrakech</a></li>
+        <li><a href="#">➤ Day tours from Casablanca</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Social Media Icons -->
+  <div class="social-icons">
+    <a href="#" class="icon instagram"><i class="fab fa-instagram"></i></a>
+    <a href="#" class="icon facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" class="icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+    <a href="#" class="icon phone"><i class="fas fa-phone"></i></a>
+    <a href="#" class="icon email"><i class="fas fa-envelope"></i></a>
+  </div>
+
+</body>
+</html>
+
+  <!-- Map initialization script   -->
+ 
+  <script>
+    function initMap() {
+      const fes = { lat: 34.0331, lng: -5.0003 };
+      const merzouga = { lat: 31.0994, lng: -4.0111 };
+
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 6,
+        center: { lat: 32.5, lng: -4.5 },
+      });
+
+      new google.maps.Marker({ position: fes, map: map, title: "Fes" });
+      new google.maps.Marker({ position: merzouga, map: map, title: "Merzouga" });
+
+      const route = new google.maps.Polyline({
+        path: [fes, merzouga],
+        geodesic: true,
+        strokeColor: "#FF5733",
+        strokeOpacity: 1.0,
+        strokeWeight: 4,
+      });
+      route.setMap(map);
+    }
+    // بيانات الجولات (يجب استبدالها ببياناتك الفعلية)
+
+
+  </script>
+
+  
+
+    <script src="tours.js"></script>
+</body>
+</html>

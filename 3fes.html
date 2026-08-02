@@ -1,0 +1,408 @@
+<?php 
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="description" content="Discover the best Morocco tours with our expert guides. Book your desert adventure, city tours, and cultural experiences today.">
+    <meta name="keywords" content="Morocco tours, Sahara desert, Marrakech, Fes, Agadir, travel Morocco">
+    <meta name="author" content="Morocco Tours">
+    <title>Morocco Tours | Discover the Magic of Morocco | Book Now</title>
+    <link rel="stylesheet" href="tours.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <!-- Google Maps API (replace YOUR_API_KEY with your real key) -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    h1, h2, h3 {
+      color: #8B4513;
+    }
+    section {
+      margin-bottom: 40px;
+      background: rgb(255, 255, 255);
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .day-itinerary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .day-description, .day-photo {
+      flex: 1;
+      min-width: 300px;
+    }
+    .day-photo img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .included-section {
+      display: flex;
+      gap: 30px;
+    }
+    .included, .not-included {
+      flex: 1;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    .included {
+      background-color: #f0f8ff;
+      border-left: 4px solid #4682B4;
+    }
+    .not-included {
+      background-color: #fff0f0;
+      border-left: 4px solid #cd5c5c;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    #map {
+      height: 400px;
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('desert.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.tours-section {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 50px 20px;
+}
+
+.tour-box {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 20px 30px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.tour-box h3 {
+  color: #e76f51;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.tour-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tour-box li {
+  margin: 10px 0;
+}
+
+.tour-box a {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.tour-box a:hover {
+  color: #e76f51;
+}
+
+/* Social Icons */
+.social-icons {
+  position: fixed;
+  top: 30%;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.social-icons .icon {
+  background-color: white;
+  color: #333;
+  padding: 10px;
+  border-radius: 50%;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 18px;
+}
+
+.social-icons .icon:hover {
+  background-color: #e76f51;
+  color: white;
+}
+
+  </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="logo">Historicmorocco<span>Tours</span></div>
+            <ul class="nav-links">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li class="dropdown">
+                    <a href="#tours" class="dropbtn">Tours <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Fes <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="fesmerzouga.html">2 day tour from Fes to Merzouga</a>
+                                <a href="fesmarrakech.html">3 days desert tour from Fes to Marrakech</a>
+                                <a href="fesmarrakech3.html">4 day tour from Fes to Marrakech</a>
+                                <a href="fesmarrakech21.html">5 day from Fes to Marrakech desert tour</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Agadir <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="agadir1.html">2 day from Agadir to Sahara Desert</a>
+                                <a href="agadir2.html">3day from Agadir to zagoura desert via ouarzazate</a>
+                                <a href="agadir3.html">4 day from Agadir to marrackech via ouarzazate and taroudante</a>
+                                <a href="agadir4.html">6 days from Agadir to Fez Morocco Imperial Cities</a>
+                                <a href="agadir5.html">7 days Morocco desert tours Agadir to Fes via Marrakech</a>
+                                <a href="agadir6.html">8 Days from Agadir to the South of Morocco</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Tangier <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="tanger1.html">8 days from Tangier to Marrakech via the Sahara Desert</a>
+                                <a href="tanger2.html">10 days from Tangier to Marrakech via Merzouga</a>
+                                <a href="tanger3.html">12 Days From Tangier To Marrakech Via Erg Chebbi</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Marrakech <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="marra1.html">2 days from Marrakech to Zagora</a>
+                                <a href="marra2.html">2 days from Marrakech to Merzouga</a>
+                                <a href="marra3.html">3 days Marrakech to Fes desert tour</a>
+                                <a href="marra4.html">3 days from Marrakech to Merzouga Desert</a>
+                                <a href="marra5.html">4 days from Marrakech to Fes Desert Tour</a>
+                                <a href="marra6.html">4 days Marrakech to Merzouga Desert Tour</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Casablanca <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="casa1.html">2 days from Casablanca to Fes</a>
+                                <a href="casa2.html">2 days from Casablanca to Chefchaouen</a>
+                                <a href="casa3.html">3 days from Casablanca to Tangier and Chefchaouen</a>
+                                <a href="casa4.html">4 days Desert Tour from Casablanca to Sahara Desert</a>
+                                <a href="casa5.html">4 days Imperial cities back to Casablanca</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#day-trips" class="dropbtn">Day Trips <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <div class="dropdown-submenu">
+                            <a href="#">Day Trips from Fes <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="1fes.html">One day guided tour Fes sightseeing</a>
+                                <a href="2fes.html">Day trip from Fes to Volubilis and Meknes</a>
+                                <a href="3fes.html">Day Trip from Fes to The Middle Atlas Mountains</a>
+                                <a href="4fes.html">Day Trip from Fes to Chefchaouen</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Day Trips from Marrakech <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="1marra.html">Day Trip from Marrakech to Ait Benhaddou</a>
+                                <a href="2marra.html">Day Trip from Marrakech to Essaouira</a>
+                                <a href="3marra.html">Day Trip from Marrakech to the Ouzoud Falls</a>
+                                <a href="4marra.html">Day Trip from Marrakech to Ourika Valley</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Day Trips from Casablanca <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="1casa.html">Day Trip from Casablanca to Fez</a>
+                                <a href="2casa.html">Day Trip from Casablanca to Marrakech</a>
+                                <a href="3casa.html">Day Trip from Casablanca to Rabat</a>
+                                <a href="4casa.html">Day Trip from Casablanca to Volubilis</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search tours..." autocomplete="off">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-results" id="search-results"></div>
+            </div>
+        </nav>
+    </header>
+    
+  <section id="maps">
+    <h3>Maps</h3>
+    <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1069.2272291129895!2d-7.9898268!3d31.6294723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDM3JzQ2LjEiTiA3wrA1OSczMy40Ilc!5e0!3m2!1sen!2sma!4v1620000000000!5m2!1sen!2sma" 
+                            width="100%" 
+                            height="200" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                    </iframe>
+    
+  </section>
+
+
+
+  </section>
+
+    <!-- Day 1 -->
+        <section class="tour-section">
+            <h2>Day Trip from Fes to The Middle Atlas Moutains</h2>
+            <div class="day-itinerary">
+                <div class="day-description">
+                    <p>
+
+Enjoy the beauty and fresh air of the Central Atlas region on a full-day tour from Fes, located at 1,350 meters above sea level in the Atlas Mountains.
+
+On this day trip, you will also discover Azrou, a Berber village built at an altitude of 1250 meters and home to the first inhabitants of Morocco, the Berber tribe. Look at the Berber herds grinding flour and working in their trades, especially tapestry and carpentry. If interested, we will visit a cooperative of women weaving Berber rugs to discover the secrets of these beautiful Atlantis rugs.
+
+A little further is Morocco’s best preserved cedar forest, where Barbary macaques can be seen jumping. You can give them peanuts and take pictures. Along the cedar forest path, you may even see Atlas grey threads or wild boars.
+
+We will stop for lunch in a local restaurant where you will taste a traditional Moroccan Tajjine, then we will continue our journey to explore Ifran or the « Little Switzerland », 
+cross the flowery avenues and admire the French architecture of this picturesque little town.
+                      </p>
+                    
+                </div>
+                <div class="day-photo">
+                    <img src="https://takemoroccotours.com/wp-content/uploads/2022/02/Fez-travel-Morocco.60.jpeg" alt="Merzouga dunes">
+                </div>
+            </div>
+        </section>
+    
+       
+    <!-- Included/Excluded -->
+        <section class="tour-section">
+            <h2>What's Included & not included</h2>
+            <div class="included-section">
+                <div class="included">
+                    <h3>Included</h3>
+                    <ul>
+                        <li>Private air-conditioned transportation</li>
+                        <li>English/French speaking driver/guide</li>
+                        <li>2 nights accommodation</li>
+                        <li>Camel trek in Merzouga</li>
+                        <li>2 breakfasts and 2 dinners</li>
+                    </ul>
+                </div>
+                <div class="not-included">
+                    <h3>Not Included</h3>
+                    <ul>
+                        <li>Lunches and drinks</li>
+                        <li>Entrance fees to monuments</li>
+                        <li>Travel insurance</li>
+                        <li>Tips and personal expenses</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our Tours</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <section class="tours-section">
+    <div class="tour-box">
+      <h3>Our tours</h3>
+      <ul>
+        <li><a href="ourtourfes.html">➤ Tours from Fes</a></li>
+        <li><a href="#">➤ Tours from Agadir</a></li>
+        <li><a href="#">➤ Tours from Tangier</a></li>
+        <li><a href="#">➤ Tours from Marrakech</a></li>
+        <li><a href="#">➤ Tours from Casablanca</a></li>
+      </ul>
+    </div>
+    <div class="tour-box">
+      <h3>Our day tours</h3>
+      <ul>
+        <li><a href="#">➤ Day tours from Marrakech</a></li>
+        <li><a href="#">➤ Day tours from Casablanca</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Social Media Icons -->
+  <div class="social-icons">
+    <a href="#" class="icon instagram"><i class="fab fa-instagram"></i></a>
+    <a href="#" class="icon facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" class="icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+    <a href="#" class="icon phone"><i class="fas fa-phone"></i></a>
+    <a href="#" class="icon email"><i class="fas fa-envelope"></i></a>
+  </div>
+
+</body>
+</html>
+
+  <!-- Map initialization script   -->
+ 
+  <script>
+    function initMap() {
+      const fes = { lat: 34.0331, lng: -5.0003 };
+      const merzouga = { lat: 31.0994, lng: -4.0111 };
+
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 6,
+        center: { lat: 32.5, lng: -4.5 },
+      });
+
+      new google.maps.Marker({ position: fes, map: map, title: "Fes" });
+      new google.maps.Marker({ position: merzouga, map: map, title: "Merzouga" });
+
+      const route = new google.maps.Polyline({
+        path: [fes, merzouga],
+        geodesic: true,
+        strokeColor: "#FF5733",
+        strokeOpacity: 1.0,
+        strokeWeight: 4,
+      });
+      route.setMap(map);
+    }
+    // بيانات الجولات (يجب استبدالها ببياناتك الفعلية)
+
+
+  </script>
+
+  
+
+    <script src="tours.js"></script>
+</body>
+</html>

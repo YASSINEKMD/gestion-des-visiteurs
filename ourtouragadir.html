@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morocco Desert Tours</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+        }
+        
+        /* Navigation Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .logo span {
+            color: #d4a762;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links li {
+            position: relative;
+            margin: 0 15px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links li a:hover {
+            color: #d4a762;
+        }
+        
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown .dropbtn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 5px;
+            padding: 10px 0;
+            top: 100%;
+            left: 0;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-content a {
+            color: #333;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #f8f8f8;
+            color: #d4a762;
+        }
+        
+        /* Submenu Styles */
+        .dropdown-submenu {
+            position: relative;
+        }
+        
+        .dropdown-submenu > a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .dropdown-submenu-content {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: #fff;
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 0 5px 5px 5px;
+        }
+        
+        .dropdown-submenu:hover .dropdown-submenu-content {
+            display: block;
+        }
+        
+        .dropdown-submenu-content a {
+            padding: 10px 20px;
+        }
+        
+        /* Font Awesome Icons */
+        .fas {
+            font-size: 12px;
+        }
+        
+        /* Search Container - Aligned to right */
+        .search-container {
+            position: relative;
+            width: 250px;
+            margin-left: 20px;
+        }
+        
+        #search-input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+            background-color: #f8f8f8;
+            transition: all 0.3s ease;
+        }
+        
+        #search-input:focus {
+            border-color: #d4a762;
+            background-color: white;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+        
+        /* Search Results */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 300px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .search-results.active {
+            display: block;
+        }
+        
+        .search-result-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            color: #333;
+            text-decoration: none;
+            display: block;
+            transition: all 0.2s;
+        }
+        
+        .search-result-item:hover {
+            background-color: #f5f5f5;
+            color: #d4a762;
+        }
+        
+        .no-results {
+            padding: 12px 15px;
+            color: #777;
+            font-style: italic;
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+        }
+        
+        /* Tours Section */
+        .tours-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 28px;
+        }
+        
+        .tours-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        
+        .tour-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .tour-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .tour-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .tour-info {
+            padding: 20px;
+        }
+        
+        .tour-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .tour-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #d4a762;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .tour-link:hover {
+            background-color: #c29552;
+        }
+        
+        /* Categories Section */
+        .categories-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        .categories-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .category-column {
+            flex: 1;
+            padding: 0 15px;
+        }
+        
+        .category-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d4a762;
+        }
+        
+        .category-list {
+            list-style: none;
+        }
+        
+        .category-list li {
+            margin-bottom: 12px;
+        }
+        
+        .category-list a {
+            text-decoration: none;
+            color: #555;
+            transition: color 0.3s;
+        }
+        
+        .category-list a:hover {
+            color: #d4a762;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .search-container {
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            #search-input {
+                padding: 12px 15px 12px 45px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar">
+           <div class="logo">Historicmorocco<span>Tours</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html">About Us</a></li>
+                <li class="dropdown">
+                    <a href="#tours" class="dropbtn">Tours <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Fes <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="fesmerzouga.html">2 day tour from Fes to Merzouga</a>
+                                <a href="fesmarrakech.html">3 days desert tour from Fes to Marrakech</a>
+                                <a href="fesmarrakech3.html">4 day tour from Fes to Marrakech</a>
+                                <a href="fesmarrakech21.html">5 day from Fes to Marrakech desert tour</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Agadir <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="agadirtosahara.html">Agadir to Sahara Desert Tour</a>
+                                <a href="#">Agadir to Marrakech Tour</a>
+                                <a href="#">Agadir Coastal Tour</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Tangier <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="#">Tangier to Chefchaouen Tour</a>
+                                <a href="#">Tangier to Fes Tour</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Marrakech <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="#">Marrakech Desert Tour</a>
+                                <a href="#">Marrakech to Fes Tour</a>
+                                <a href="#">Atlas Mountains Tour</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Casablanca <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="#">Casablanca City Tour</a>
+                                <a href="#">Casablanca to Marrakech</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#day-trips" class="dropbtn">Day Trips <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <div class="dropdown-submenu">
+                            <a href="#">Day Trips from Fes <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="#">One day guided tour Fes sightseeing</a>
+                                <a href="#">Day trip from Fes to Volubilis and Meknes</a>
+                                <a href="#">Day Trip from Fes to The Middle Atlas Mountains</a>
+                                <a href="#">Day Trip from Fes to Chefchaouen</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Day Trips from Marrakech <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="#">Day Trip from Marrakech to Ait Benhaddou</a>
+                                <a href="#">Day Trip from Marrakech to Essaouira</a>
+                                <a href="#">Day Trip from Marrakech to the Ouzoud Falls</a>
+                                <a href="#">Day Trip from Marrakech to Ourika Valley</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Day Trips from Casablanca <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="#">Day Trip from Casablanca to Fez</a>
+                                <a href="#">Day Trip from Casablanca to Marrakech</a>
+                                <a href="#">Day Trip from Casablanca to Rabat</a>
+                                <a href="#">Day Trip from Casablanca to Volubilis</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="index.html">Contact</a></li>
+            </ul>
+            
+            <!-- Search Container - Now aligned to the right -->
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search tours..." autocomplete="off">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-results" id="search-results"></div>
+            </div>
+            
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Tours Section -->
+    <section class="tours-section">
+        <h2 class="section-title">Tours from agadir</h2>
+        <div class="tours-grid">
+            <!-- Tour 1 -->
+            <div class="tour-card">
+                <img src="caption.jpg" alt="Fes to Merzouga" class="tour-image">
+                <div class="tour-info">
+                    <h3 class="tour-title">Agadir to Sahara Desert Tour</h3>
+                    <a href="agadirtosahara.html" class="tour-link">details</a>
+                </div>
+            </div>
+            
+            <!-- Tour 2 -->
+            <div class="tour-card">
+                <img src="caption.jpg" alt="Fes to Marrakech" class="tour-image">
+                <div class="tour-info">
+                    <h3 class="tour-title">Agadir to Marrakech Tour</h3>
+                    <a href="agadirtosahara.html" class="tour-link">details</a>
+                </div>
+            </div>
+            
+            <!-- Tour 3 -->
+            <div class="tour-card">
+                <img src="photos-from-fes.jpg" alt="Fes to Marrakech" class="tour-image">
+                <div class="tour-info">
+                    <h3 class="tour-title">Agadir Coastal Tour</h3>
+                    <a href="agadirtosahara.html" class="tour-link">details</a>
+                </div>
+            </div>
+            
+          
+    
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <h2 class="section-title">Our Tours</h2>
+        <div class="categories-container">
+            <div class="category-column">
+                <h3 class="category-title">Our tours</h3>
+                <ul class="category-list">
+                    <li><a href="ourtourfes.html">Tours from Fes</a></li>
+                    <li><a href="agadirtosahara.html">Tours from Agadir</a></li>
+                    <li><a href="#">Tours from Tangier</a></li>
+                    <li><a href="#">Tours from Marrakech</a></li>
+                    <li><a href="#">Tours from Casablanca</a></li>
+                </ul>
+            </div>
+            
+            <div class="category-column">
+                <h3 class="category-title">Our day tours</h3>
+                <ul class="category-list">
+                    <li><a href="#">Day tours from Marrakech</a></li>
+                    <li><a href="#">Day tours from Casablanca</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

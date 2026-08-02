@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover the best Morocco tours with our expert guides. Book your desert adventure, city tours, and cultural experiences today.">
+    <meta name="keywords" content="Morocco tours, Sahara desert, Marrakech, Fes, Agadir, travel Morocco">
+    <meta name="author" content="Morocco Tours">
+    <title>Morocco Tours | Discover the Magic of Morocco | Book Now</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="tours.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar">
+           <div class="logo">Historicmorocco<span>Tours</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html">About Us</a></li>
+                <li class="dropdown">
+                    <a href="#tours" class="dropbtn">Tours <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Fes <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="fesmerzouga.html">2 day tour from Fes to Merzouga</a>
+                                <a href="fesmarrakech.html">3 days desert tour from Fes to Marrakech</a>
+                                <a href="fesmarrakech3.html">4 day tour from Fes to Marrakech</a>
+                                <a href="fesmarrakech21.html">5 day from Fes to Marrakech desert tour</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Agadir <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="#">Agadir to Sahara Desert Tour</a>
+                                <a href="#">Agadir to Marrakech Tour</a>
+                                <a href="#">Agadir Coastal Tour</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Tangier <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="#">Tangier to Chefchaouen Tour</a>
+                                <a href="#">Tangier to Fes Tour</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Marrakech <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="#">Marrakech Desert Tour</a>
+                                <a href="#">Marrakech to Fes Tour</a>
+                                <a href="#">Atlas Mountains Tour</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-submenu">
+                            <a href="#">Tours from Casablanca <i class="fas fa-chevron-right"></i></a>
+                            <div class="dropdown-submenu-content">
+                                <a href="#">Casablanca City Tour</a>
+                                <a href="#">Casablanca to Marrakech</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+               <li class="dropdown">
+    <a href="#day-trips" class="dropbtn">Day Trips <i class="fas fa-chevron-down"></i></a>
+    <div class="dropdown-content">
+        <div class="dropdown-submenu">
+            <a href="#">Day Trips from Fes <i class="fas fa-chevron-right"></i></a>
+            <div class="dropdown-submenu-content">
+                <a href="#">One day guided tour Fes sightseeing</a>
+                <a href="#">Day trip from Fes to Volubilis and Meknes</a>
+                <a href="#">Day Trip from Fes to The Middle Atlas Mountains</a>
+                <a href="#">Day Trip from Fes to Chefchaouen</a>
+            </div>
+        </div>
+        <div class="dropdown-submenu">
+            <a href="#">Day Trips from Marrakech <i class="fas fa-chevron-right"></i></a>
+            <div class="dropdown-submenu-content">
+                <a href="#">Day Trip from Marrakech to Ait Benhaddou</a>
+                <a href="#">Day Trip from Marrakech to Essaouira</a>
+                <a href="#">Day Trip from Marrakech to the Ouzoud Falls</a>
+                <a href="#">Day Trip from Marrakech to Ourika Valley</a>
+            </div>
+        </div>
+        <div class="dropdown-submenu">
+            <a href="#">Day Trips from Casablanca <i class="fas fa-chevron-right"></i></a>
+            <div class="dropdown-submenu-content">
+                <a href="#">Day Trip from Casablanca to Fez</a>
+                <a href="#">Day Trip from Casablanca to Marrakech</a>
+                <a href="#">Day Trip from Casablanca to Rabat</a>
+                <a href="#">Day Trip from Casablanca to Volubilis</a>
+            </div>
+        </div>
+    </div>
+</li>
+                <li><a href="index.html">Contact</a></li>
+         
+            </ul>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+        <!-- HTML للبحث -->
+<div class="search-container">
+    <input type="text" id="search-input" placeholder="Search tours..." autocomplete="off">
+    <i class="fas fa-search search-icon"></i>
+    <div class="search-results" id="search-results"></div>
+</div>
+    </header>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    h1, h2, h3 {
+      color: #8B4513;
+    }
+    section {
+      margin-bottom: 40px;
+      background: rgb(255, 255, 255);
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .day-itinerary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .day-description, .day-photo {
+      flex: 1;
+      min-width: 300px;
+    }
+    .day-photo img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .included-section {
+      display: flex;
+      gap: 30px;
+    }
+    .included, .not-included {
+      flex: 1;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    .included {
+      background-color: #f0f8ff;
+      border-left: 4px solid #4682B4;
+    }
+    .not-included {
+      background-color: #fff0f0;
+      border-left: 4px solid #cd5c5c;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    #map {
+      height: 400px;
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('desert.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.tours-section {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 50px 20px;
+}
+
+.tour-box {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 20px 30px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.tour-box h3 {
+  color: #e76f51;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.tour-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tour-box li {
+  margin: 10px 0;
+}
+
+.tour-box a {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.tour-box a:hover {
+  color: #e76f51;
+}
+
+/* Social Icons */
+.social-icons {
+  position: fixed;
+  top: 30%;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.social-icons .icon {
+  background-color: white;
+  color: #333;
+  padding: 10px;
+  border-radius: 50%;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 18px;
+}
+
+.social-icons .icon:hover {
+  background-color: #e76f51;
+  color: white;
+}
+/* تنسيقات البحث الأساسية */
+.search-container {
+    position: relative;
+    width: 250px;
+    margin-left: auto;
+}
+
+#search-input {
+    width: 100%;
+    padding: 10px 15px 10px 40px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 14px;
+    outline: none;
+    background-color: #f8f8f8;
+    transition: all 0.3s ease;
+}
+
+#search-input:focus {
+    border-color: #d4af37;
+    background-color: white;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+}
+
+/* نتائج البحث */
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: none;
+}
+
+.search-results.active {
+    display: block;
+}
+
+.search-result-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+    text-decoration: none;
+    display: block;
+    transition: all 0.2s;
+}
+
+.search-result-item:hover {
+    background-color: #f5f5f5;
+    color: #d4af37;
+}
+
+.no-results {
+    padding: 12px 15px;
+    color: #777;
+    font-style: italic;
+}
+
+/* نسخة الجوال */
+@media (max-width: 768px) {
+    .search-container {
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    #search-input {
+        padding: 12px 15px 12px 45px;
+    }
+}
+/* Header & Navigation */
+header {
+    background-color: var(--white);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.logo span {
+    color: var(--secondary-color);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 1.5rem;
+    position: relative;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--dark-color);
+    font-weight: 500;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.nav-links i {
+    margin-left: 5px;
+    font-size: 0.8rem;
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: block;
+    position: absolute;
+    background-color: var(--white);
+    min-width: 220px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    z-index: 1001;
+    border-radius: 5px;
+    top: 100%;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    transform: translateY(10px);
+    white-space: nowrap;
+    text-align: right;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu-content {
+    display: block;
+    position: absolute;
+    right: 100%;
+    top: 0;
+    background-color: var(--white);
+    min-width: 220px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    z-index: 1002;
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    transform: translateX(10px);
+    margin-right: 5px;
+    text-align: right;
+}
+
+.dropdown:hover .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-submenu:hover .dropdown-submenu-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.dropdown-content a {
+    color: var(--dark-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.dropdown-content a:hover {
+    background-color: #f9f9f9;
+    color: var(--primary-color);
+}
+
+/* Search Styles */
+.search-container {
+    position: relative;
+    width: 250px;
+    margin-left: auto;
+}
+
+#search-input {
+    width: 100%;
+    padding: 10px 15px 10px 40px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 14px;
+    outline: none;
+    background-color: #f8f8f8;
+    transition: all 0.3s ease;
+}
+
+#search-input:focus {
+    border-color: var(--primary-color);
+    background-color: white;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+}
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: none;
+}
+
+.search-results.active {
+    display: block;
+}
+
+.search-result-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+    text-decoration: none;
+    display: block;
+    transition: all 0.2s;
+}
+
+.search-result-item:hover {
+    background-color: #f5f5f5;
+    color: var(--primary-color);
+}
+
+.no-results {
+    padding: 12px 15px;
+    color: #777;
+    font-style: italic;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--dark-color);
+}
+  </style>
+
+  <!-- Google Maps API (replace YOUR_API_KEY with your real key) -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+</head>
+<body>
+
+  <section id="maps">
+    <h3>Maps</h3>
+    <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1069.2272291129895!2d-7.9898268!3d31.6294723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDM3JzQ2LjEiTiA3wrA1OSczMy40Ilc!5e0!3m2!1sen!2sma!4v1620000000000!5m2!1sen!2sma" 
+                            width="100%" 
+                            height="200" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                    </iframe>
+    <p>Explore the route of our exciting day trip from the coastal city of Agadir to the stunning Sahara Desert.</p>
+  </section>
+
+  <section id="introduction">
+    <h2>Introduction</h2>
+    <p>Experience the magic of the Moroccan desert on this unforgettable day trip from Agadir to the Sahara. This action-packed excursion takes you from the Atlantic coast through dramatic landscapes to the golden dunes of the desert, offering a taste of Morocco's diverse beauty in just one day.</p>
+    <p>Your journey will take you through the Anti-Atlas Mountains, past traditional Berber villages, and into the heart of the desert where you'll experience camel trekking, sandboarding, and a traditional Moroccan lunch under the shade of palm trees.</p>
+    <p>Perfect for those short on time but wanting to experience the essence of Morocco's desert landscapes, this tour combines adventure, culture, and breathtaking scenery in a single memorable day.</p>
+  </section>
+
+  <section id="day1">
+    <h2>Day Itinerary: Agadir to Sahara Desert</h2>
+    <div class="day-itinerary">
+      <div class="day-description">
+        <h3>Morning Departure</h3>
+        <p>Your adventure begins with an early morning pickup from your Agadir hotel. We'll head east through the stunning Anti-Atlas Mountains, stopping at Taliouine, the saffron capital of Morocco, where you can learn about this precious spice.</p>
+        
+        <h3>Desert Arrival</h3>
+        <p>By late morning, we arrive at the desert outskirts where you'll switch to 4x4 vehicles for the final approach to the dunes. Experience the thrill of dune bashing as we navigate the golden sands.</p>
+        
+        <h3>Camel Trek & Lunch</h3>
+        <p>Enjoy a traditional camel ride across the dunes to a desert oasis where a delicious Moroccan lunch awaits under the shade of palm trees. Relax and soak in the serene desert atmosphere.</p>
+      </div>
+      <div class="day-photo">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/ee/a4/de/caption.jpg?w=600&h=600&s=1" alt="Camel trek in the Sahara near Agadir">
+      </div>
+    </div>
+    
+    <div class="day-itinerary">
+      <div class="day-photo">
+        <img src="data:image/jpeg;base64,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" alt="Sandboarding in the desert">
+      </div>
+      <div class="day-description">
+        <h3>Afternoon Activities</h3>
+        <p>After lunch, try your hand at sandboarding down the golden dunes or simply relax and enjoy the peaceful desert scenery. Visit a traditional Berber nomad family to learn about their way of life.</p>
+        
+        <h3>Return Journey</h3>
+        <p>As the afternoon cools, we begin our return journey to Agadir, stopping at panoramic viewpoints to capture the last photos of the dramatic landscapes. We'll arrive back in Agadir by evening, just in time for dinner.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="included">
+    <h2>What's Included & Not Included</h2>
+    <div class="included-section">
+      <div class="included">
+        <h3>Included</h3>
+        <ul>
+          <li>Round-trip transportation from Agadir</li>
+          <li>Professional English-speaking guide</li>
+          <li>Camel trek in the desert</li>
+          <li>Traditional Moroccan lunch</li>
+          <li>Sandboarding equipment</li>
+          <li>Hotel pickup and drop-off</li>
+          <li>All entrance fees</li>
+        </ul>
+      </div>
+      <div class="not-included">
+        <h3>Not Included</h3>
+        <ul>
+          <li>Breakfast and dinner</li>
+          <li>Personal expenses</li>
+          <li>Gratuities for guides and drivers</li>
+          <li>Travel insurance</li>
+          <li>Any additional activities not mentioned</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our Tours</title>
+  <link rel="stylesheet" href="tours.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <section class="tours-section">
+    <div class="tour-box">
+      <h3>Our tours</h3>
+      <ul>
+        <li><a href="ourtourfes.html">➤ Tours from Fes</a></li>
+        <li><a href="ourtouragadir.html">➤ Tours from Agadir</a></li>
+        <li><a href="#">➤ Tours from Tangier</a></li>
+        <li><a href="#">➤ Tours from Marrakech</a></li>
+        <li><a href="#">➤ Tours from Casablanca</a></li>
+      </ul>
+    </div>
+    <div class="tour-box">
+      <h3>Our day tours</h3>
+      <ul>
+        <li><a href="#">➤ Day tours from Marrakech</a></li>
+        <li><a href="#">➤ Day tours from Casablanca</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Social Media Icons -->
+  <div class="social-icons">
+    <a href="#" class="icon instagram"><i class="fab fa-instagram"></i></a>
+    <a href="#" class="icon facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" class="icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+    <a href="#" class="icon phone"><i class="fas fa-phone"></i></a>
+    <a href="#" class="icon email"><i class="fas fa-envelope"></i></a>
+  </div>
+
+</body>
+</html>
+
+  <!-- Map initialization script   -->
+ 
+  <script>
+    function initMap() {
+      const agadir = { lat: 30.4278, lng: -9.5981 };
+      const sahara = { lat: 29.9833, lng: -8.3333 };
+
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 7,
+        center: { lat: 30.5, lng: -8.5 },
+      });
+
+      new google.maps.Marker({ position: agadir, map: map, title: "Agadir" });
+      new google.maps.Marker({ position: sahara, map: map, title: "Sahara Desert" });
+
+      const route = new google.maps.Polyline({
+        path: [agadir, sahara],
+        geodesic: true,
+        strokeColor: "#FF5733",
+        strokeOpacity: 1.0,
+        strokeWeight: 4,
+      });
+      route.setMap(map);
+    }
+    // بيانات الجولات (يجب استبدالها ببياناتك الفعلية)
+const toursData = [
+    { title: "2 day tour from Fes to Merzouga", url: "fesmerzouga.html" },
+    { title: "3 days desert tour from Fes to Marrakech", url: "#" },
+    { title: "4 day tour from Fes to Marrakech", url: "#" },
+    { title: "5 day from Fes to Marrakech desert tour", url: "#" },
+    { title: "Agadir to Sahara Desert Tour", url: "#" },
+    { title: "Marrakech Desert Tour", url: "#" },
+    { title: "Atlas Mountains & Berber Villages", url: "#" },
+    { title: "Imperial Cities Tour", url: "#" },
+    { title: "Chefchaouira Day Trip", url: "#" }
+];
+
+// عناصر البحث
+const searchInput = document.getElementById('search-input');
+const searchResults = document.getElementById('search-results');
+
+// وظيفة البحث
+function performSearch(query) {
+    if (query.length < 2) {
+        searchResults.innerHTML = '';
+        searchResults.classList.remove('active');
+        return;
+    }
+    
+    const results = toursData.filter(tour => 
+        tour.title.toLowerCase().includes(query.toLowerCase())
+    );
+    
+    if (results.length > 0) {
+        searchResults.innerHTML = results.map(tour => `
+            <a href="${tour.url}" class="search-result-item">
+                ${tour.title}
+            </a>
+        `).join('');
+        searchResults.classList.add('active');
+    } else {
+        searchResults.innerHTML = '<div class="no-results">No tours found</div>';
+        searchResults.classList.add('active');
+    }
+}
+
+// أحداث البحث
+searchInput.addEventListener('input', function() {
+    performSearch(this.value);
+});
+
+searchInput.addEventListener('focus', function() {
+    if (this.value.length >= 2) {
+        performSearch(this.value);
+    }
+});
+
+// إغلاق النتائج عند النقر خارجها
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.search-container')) {
+        searchResults.classList.remove('active');
+    }
+});
+
+// الضغط على Enter للذهاب لأول نتيجة
+searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        const firstResult = searchResults.querySelector('.search-result-item');
+        if (firstResult) {
+            window.location.href = firstResult.href;
+        }
+    }
+});
+  </script>
+
+</body>
+</html>
